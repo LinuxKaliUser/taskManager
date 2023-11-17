@@ -25,23 +25,23 @@ export const routes: Routes = [
         path: 'tab4',
         children: [
           {
-            path: 'foods',
+            path: 'todos',
             loadComponent: () =>
               import('../todo-list/todo-list.component').then((m) => m.FoodListComponent),
           },
           {
-            path: 'food',
+            path: 'todo',
             loadComponent: () =>
               import('../todo-detail/todo-detail.component').then((m) => m.TodoDetailComponent),
           },
           {
-            path: 'food/:id',
+            path: 'todo/:id',
             loadComponent: () =>
               import('../todo-detail/todo-detail.component').then((m) => m.TodoDetailComponent),
           },
           {
             path: '',
-            redirectTo: 'foods',
+            redirectTo: 'todos',
             pathMatch: 'full',
           }
         ],
