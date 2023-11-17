@@ -27,7 +27,7 @@ export const routes: Routes = [
           {
             path: 'todos',
             loadComponent: () =>
-              import('../todo-list/todo-list.component').then((m) => m.FoodListComponent),
+              import('../todo-list/todo-list.component').then((m) => m.TodoListComponent),
           },
           {
             path: 'todo',

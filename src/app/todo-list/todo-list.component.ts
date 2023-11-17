@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   imports: [IonicModule,CommonModule],
   standalone: true
 })
-export class FoodListComponent  implements OnInit {
+export class TodoListComponent  implements OnInit {
 
   todos : Array<Todo> | null = []
 
