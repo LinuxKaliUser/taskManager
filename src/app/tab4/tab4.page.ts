@@ -9,7 +9,7 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './tab4.page.html',
   styleUrls: ['./tab4.page.scss'],
   standalone: true,
-  imports: [IonicModule,TodoListComponent,TodoDetailComponent,RouterModule]
+  imports: [IonicModule, TodoListComponent, TodoDetailComponent, RouterModule]
 })
 export class Tab4Page {
 

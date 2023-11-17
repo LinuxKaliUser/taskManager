@@ -46,9 +46,9 @@ export class TodoService {
     const { data, error} = await this.supabase
       .from(TODO_TABLE)
       .select('*')
-      .order('name')
+      .order('title')
 
-    return data || []
+    return data
   }
 
   async updateTodo (todo: Todo) {
