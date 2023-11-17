@@ -22,6 +22,17 @@ export class TodoService {
   createLoader() {
     return this.loadingCtrl.create()
   }
+  
+  async uploadImage(file: File) {
+    const filePath = `uploads/${file.name}`;
+    let { error } = await this.supabase.storage.from('images').upload(filePath, file);
+  
+    if (error) {
+      throw error;
+    }
+  
+    return `https://your-supabase-url/storage/v1/object/public/images/${filePath}`;
+  }
 
   /**async getCategories () {
     const { data, error } = await this.supabase
@@ -39,7 +50,7 @@ export class TodoService {
       .eq('id', id)
       .single()
 
-    return data || {}
+    return data
   }
 
   async getTodos () {
@@ -51,24 +62,38 @@ export class TodoService {
     return data
   }
 
-  async updateTodo (todo: Todo) {
+  async updateTodo (todo: Todo, imageFile: File) {
+    const imageUrl = imageFile?await this.uploadImage(imageFile):'';
+
+    if (!todo.id || !todo.title || !todo.description || !todo.doneDate || !todo.location) {
+        console.log
+        ('Invalid todo object');
+    }
+
     const {data, error} = await this.supabase
       .from(TODO_TABLE)
-      .update(todo)
+      .update({
+        id:todo.id, 
+        title:todo.title, 
+        description:todo.description, 
+        doneDate:todo.doneDate,
+        image:imageUrl, 
+        location:todo.location })
       .eq('id', todo.id)
       .select()
 
     return data
   }
 
-  async createTodo (todo: Todo) {
+  async createTodo (todo: Todo, imageFile: File) {
+    const imageUrl = imageFile?await this.uploadImage(imageFile):'';
     const { data, error } = await this.supabase
       .from(TODO_TABLE)
       .insert({
         title: todo.title,
         description: todo.description,
         doneDate: todo.doneDate,
-        image: todo.image,
+        image: imageUrl,
         location: todo.location
       })
       .select('*')

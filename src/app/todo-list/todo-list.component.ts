@@ -59,12 +59,12 @@ export class TodoListComponent  implements OnInit {
     event.target.complete()
   }
 
-  async edit (food:Todo) {
-    await this.router.navigate(['tabs/tab4/food', food.id])
+  async edit (todo:Todo) {
+    await this.router.navigate(['tabs/tab4/todo', todo.id])
   }
 
-  delete (food:Todo) {
-    this.todoService.deleteTodo(food)
+  delete (todo:Todo) {
+    this.todoService.deleteTodo(todo)
       .then(payload =>  {
         this.todoService.getTodos()
           .then(data => {

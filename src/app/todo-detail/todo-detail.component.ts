@@ -20,12 +20,13 @@ export class TodoDetailComponent  implements OnInit {
 
   public todoForm: FormGroup = new FormGroup({
     id: new FormControl(0),
-    title: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
-    doneDate: new FormControl(null, Validators.required), // This is now typed to allow Date or null
-    image: new FormControl(null, Validators.required),
-    location: new FormControl('', Validators.required)
+    title: new FormControl(''),
+    description: new FormControl(''),
+    doneDate: new FormControl(null), // This is now typed to allow Date or null
+    image: new FormControl(''),
+    location: new FormControl('')
   });
+  imageFile: any;
 
   constructor(
       private todoService : TodoService,
@@ -41,11 +42,11 @@ export class TodoDetailComponent  implements OnInit {
             this.todo = data
             this.todoForm = this.formBuilder.group({
               id: [this.todo?.id || 0],
-              title: [this.todo?.title || '', Validators.required],
-              description: [this.todo?.description || '', Validators.required],
-              doneDate: [this.todo?.doneDate || null, Validators.required],
-              image: [this.todo?.image || null, Validators.required],
-              location: [this.todo?.location || '', Validators.required],
+              title: [this.todo?.title || ''],
+              description: [this.todo?.description || ''],
+              doneDate: [this.todo?.doneDate || null],
+              image: [this.todo?.image || ''],
+              location: [this.todo?.location || ''],
             });
         })
     }
@@ -60,17 +61,23 @@ export class TodoDetailComponent  implements OnInit {
     this.todo = Object.assign(formData)
 
     if (this.todo.id) {
-      this.todoService.updateTodo(this.todo)
+      this.todoService.updateTodo(this.todo, this.todo.image)
         .then(payload=>{
           this.back()
         })
       } else {
-        this.todoService.createTodo(this.todo)
+        this.todoService.createTodo(this.todo, this.todo.image)
           .then(payload=>{
             this.back()
           })
       }
   }
+ /**  onFileChange(event: { target: { files: string | any[]; }; }) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.imageFile = file;
+    }
+  }*/
 
 
 }

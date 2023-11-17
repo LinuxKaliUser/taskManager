@@ -3,6 +3,7 @@ export class Todo {
     public title: string = ''
     public description: string = ''
     public doneDate?: Date
-    public image?: Blob
-    public location?: string = ''
+    public imageUrl: string = ''
+    public location: string = ''
+  image: any
 }
