@@ -2,17 +2,16 @@ import { Injectable } from "@angular/core";
 
 import { LoadingController } from "@ionic/angular";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { Food } from "src/app/data/food";
+import { Todo as Todo } from "src/app/data/todo";
 import { environment } from "src/environments/environment";
 
-export const FOOD_TABLE = 'food'
-export const CATEGORIES_TABLE = 'categories'
+export const TODO_TABLE = 'todo'
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class FoodService {
+export class TodoService {
 
   private supabase: SupabaseClient
 
@@ -24,18 +23,18 @@ export class FoodService {
     return this.loadingCtrl.create()
   }
 
-  async getCategories () {
+  /**async getCategories () {
     const { data, error } = await this.supabase
       .from(CATEGORIES_TABLE)
       .select('*')
       .order('name')
 
     return data || []
-  }
+  }*/
 
-  async getFood (id: number) {
+  async getTodo (id: number) {
     const { data, error } = await this.supabase
-      .from(FOOD_TABLE)
+      .from(TODO_TABLE)
       .select('*')
       .eq('id', id)
       .single()
@@ -43,33 +42,34 @@ export class FoodService {
     return data || {}
   }
 
-  async getFoods () {
+  async getTodos () {
     const { data, error} = await this.supabase
-      .from(FOOD_TABLE)
+      .from(TODO_TABLE)
       .select('*')
       .order('name')
 
     return data || []
   }
 
-  async updateFood (food: Food) {
+  async updateTodo (todo: Todo) {
     const {data, error} = await this.supabase
-      .from(FOOD_TABLE)
-      .update(food)
-      .eq('id', food.id)
+      .from(TODO_TABLE)
+      .update(todo)
+      .eq('id', todo.id)
       .select()
 
     return data
   }
 
-  async createFood(food : Food) {
-
-    const {data, error} = await this.supabase
-      .from(FOOD_TABLE)
+  async createTodo (todo: Todo) {
+    const { data, error } = await this.supabase
+      .from(TODO_TABLE)
       .insert({
-        name: food.name,
-        category: food.category,
-        score: food.score
+        title: todo.title,
+        description: todo.description,
+        doneDate: todo.doneDate,
+        image: todo.image,
+        location: todo.location
       })
       .select('*')
       .single();
@@ -77,11 +77,11 @@ export class FoodService {
     return data
   }
 
-  async deleteFood (food: Food) {
+  async deleteTodo (todo: Todo) {
     const {data, error} = await this.supabase
-      .from(FOOD_TABLE)
+      .from(TODO_TABLE)
       .delete()
-      .eq('id', food.id)
+      .eq('id', todo.id)
       .select()
 
     return data

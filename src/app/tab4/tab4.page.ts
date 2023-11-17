@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { FoodListComponent } from '../food-list/food-list.component';
-import { FoodDetailComponent } from '../food-detail/food-detail.component';
+import { FoodListComponent } from '../todo-list/todo-list.component';
+import { TodoDetailComponent } from '../todo-detail/todo-detail.component';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './tab4.page.html',
   styleUrls: ['./tab4.page.scss'],
   standalone: true,
-  imports: [IonicModule,FoodListComponent,FoodDetailComponent,RouterModule]
+  imports: [IonicModule,FoodListComponent,TodoDetailComponent,RouterModule]
 })
 export class Tab4Page {
 

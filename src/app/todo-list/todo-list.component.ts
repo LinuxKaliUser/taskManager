@@ -1,25 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { FoodService } from '../services/food.service';
+import { TodoService } from '../services/todo.service';
 import { CommonModule } from '@angular/common';
-import { Food } from 'src/app/data/food';
+import { Todo } from 'src/app/data/todo';
 import { Router } from '@angular/router';
-import { Category } from '../data/category';
 
 @Component({
-  selector: 'app-food-list',
-  templateUrl: './food-list.component.html',
-  styleUrls: ['./food-list.component.scss'],
+  selector: 'app-todo-list',
+  templateUrl: './todo-list.component.html',
+  styleUrls: ['./todo-list.component.scss'],
   imports: [IonicModule,CommonModule],
   standalone: true
 })
 export class FoodListComponent  implements OnInit {
 
-  foods : Array<Food> | null = []
-  categories : Array<Category> | null = []
+  todos : Array<Todo> | null = []
 
   constructor(
-    private foodService : FoodService,
+    private todoService : TodoService,
     private router : Router) { }
 
   ngOnInit() {
@@ -27,24 +25,33 @@ export class FoodListComponent  implements OnInit {
   }
 
   loadData () {
-    this.foodService.getCategories()
+   /**  this.todoService.getCategories()
       .then(data => {
         this.categories = data
-      })
-    this.foodService.getFoods()
+      }) */
+    this.todoService.getTodos()
       .then(data => {
-        this.foods = data
+        this.todos = data
       })
   }
 
-  getFoodsOfCategory (category : number) {
-    let filteredFoods : Array<Food> = []
+  /**getFoodsOfCategory (category : number) {
+    let filteredFoods : Array<Todo> = []
     if (this.foods) {
       filteredFoods = this.foods
         .filter(food => food.category == category)
     }
     return filteredFoods
 
+  }*/
+
+  getTodoOfLocation (location : string) {
+    let filteredTodos : Array<Todo> = []
+    if (this.todos) {
+      filteredTodos = this.todos
+        .filter(todo => todo.location == location)
+    }
+    return filteredTodos
   }
 
   async handleRefresh (event : any) {
@@ -52,16 +59,16 @@ export class FoodListComponent  implements OnInit {
     event.target.complete()
   }
 
-  async edit (food:Food) {
+  async edit (food:Todo) {
     await this.router.navigate(['tabs/tab4/food', food.id])
   }
 
-  delete (food:Food) {
-    this.foodService.deleteFood(food)
+  delete (food:Todo) {
+    this.todoService.deleteTodo(food)
       .then(payload =>  {
-        this.foodService.getFoods()
+        this.todoService.getTodos()
           .then(data => {
-            this.foods = data
+            this.todos = data
           })
       })
   }
