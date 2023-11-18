@@ -62,6 +62,9 @@ export class TodoListComponent  implements OnInit {
   async edit (todo:Todo) {
     await this.router.navigate(['tabs/tab4/todo', todo.id])
   }
+  async create() {
+    await this.router.navigate(['tabs/tab4/todo'])
+  }
 
   delete (todo:Todo) {
     this.todoService.deleteTodo(todo)

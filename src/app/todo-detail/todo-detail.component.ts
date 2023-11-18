@@ -16,7 +16,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TodoDetailComponent  implements OnInit {
 
   todo : Todo = new Todo()
-  //todoForm: FormGroup<{ id: FormControl<number | 0>; title: FormControl<string | ''>; description: FormControl<string | ''>; doneDate: FormControl<string | null>; Image: FormControl<Blob | null >; location: FormControl<string | ''>; }> ;
 
   public todoForm: FormGroup = new FormGroup({
     id: new FormControl(0),
@@ -45,7 +44,7 @@ export class TodoDetailComponent  implements OnInit {
               title: [this.todo?.title || ''],
               description: [this.todo?.description || ''],
               doneDate: [this.todo?.doneDate || null],
-              image: [this.todo?this.imageFile : ''],
+              image: [this.todo?.image || ''],
               location: [this.todo?.location || ''],
             });
         })

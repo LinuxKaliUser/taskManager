@@ -23,6 +23,7 @@
       formControlName="doneDate"
       ></ion-datetime>
       <input type="file" (change)="onFileSelected($event)" />
+      <img [src]="todoForm.controls['image'].value">
       <ion-input
       label="Location"
       labelPlacement="floating"
