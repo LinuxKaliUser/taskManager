@@ -45,7 +45,7 @@ export class TodoDetailComponent  implements OnInit {
               title: [this.todo?.title || ''],
               description: [this.todo?.description || ''],
               doneDate: [this.todo?.doneDate || null],
-              image: [this.todo?.image || ''],
+              image: [this.todo?this.imageFile : ''],
               location: [this.todo?.location || ''],
             });
         })
@@ -61,23 +61,24 @@ export class TodoDetailComponent  implements OnInit {
     this.todo = Object.assign(formData)
 
     if (this.todo.id) {
-      this.todoService.updateTodo(this.todo, this.todo.image)
+      this.todoService.updateTodo(this.todo, this.imageFile)
         .then(payload=>{
           this.back()
         })
       } else {
-        this.todoService.createTodo(this.todo, this.todo.image)
+        this.todoService.createTodo(this.todo,  this.imageFile)
           .then(payload=>{
             this.back()
           })
       }
   }
- /**  onFileChange(event: { target: { files: string | any[]; }; }) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.imageFile = file;
-    }
-  }*/
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+  if (input && input.files && input.files.length) {
+    this.imageFile = input.files[0];
+  }
+  }
 
 
 }

@@ -22,8 +22,7 @@
       placeholder="Select Date"
       formControlName="doneDate"
       ></ion-datetime>
-      <ion-input type="file" formControlName="image">
-      ></ion-input>
+      <input type="file" (change)="onFileSelected($event)" />
       <ion-input
       label="Location"
       labelPlacement="floating"

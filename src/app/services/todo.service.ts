@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { LoadingController } from "@ionic/angular";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { Todo as Todo } from "src/app/data/todo";
+import { Todo } from "src/app/data/todo";
 import { environment } from "src/environments/environment";
 
 export const TODO_TABLE = 'todo'
@@ -31,7 +31,7 @@ export class TodoService {
       throw error;
     }
   
-    return `https://your-supabase-url/storage/v1/object/public/images/${filePath}`;
+    return `https://gcpikafueghoinixabuv.supabase.co/storage/v1/object/public/images/${filePath}`;
   }
 
   /**async getCategories () {
