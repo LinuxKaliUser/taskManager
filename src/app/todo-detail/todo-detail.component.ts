@@ -44,7 +44,7 @@ export class TodoDetailComponent  implements OnInit {
               title: [this.todo?.title || ''],
               description: [this.todo?.description || ''],
               doneDate: [this.todo?.doneDate || null],
-              image: [this.todo?.image || ''],
+              image: [this.todo?.imageUrl || ''],
               location: [this.todo?.location || ''],
             });
         })

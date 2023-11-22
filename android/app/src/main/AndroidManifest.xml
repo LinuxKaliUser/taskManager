@@ -19,4 +19,5 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <meta-data android:name="com.google.android.geo.AIzaSyDb8evRmJ7vRD979KDtz2xiXfe4YfveYa8" android:value="AIzaSyDb8evRmJ7vRD979KDtz2xiXfe4YfveYa8"/>
 </manifest>

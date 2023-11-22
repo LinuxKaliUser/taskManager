@@ -21,3 +21,6 @@
   <ion-button fill="clear" (click)="getCurrentPosition()">Location requesting</ion-button>
   <ion-button fill="clear" (click)="resetPosition()">Reset</ion-button>
 </ion-card>
+<google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
+  <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"></map-marker>
+</google-map>

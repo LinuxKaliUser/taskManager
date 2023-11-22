@@ -5,5 +5,4 @@ export class Todo {
     public doneDate?: Date
     public imageUrl: string = ''
     public location: string = ''
-  image: any
 }
