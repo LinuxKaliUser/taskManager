@@ -1,8 +1,7 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Geolocation</ion-card-title>
-  </ion-card-header>
 
+  
+  
+  <!--
     <ion-list>
       <ion-item>
         <ion-label>Latitude</ion-label>
@@ -17,10 +16,14 @@
         {{ altitude }}
       </ion-item>
     </ion-list>
-
-  <ion-button fill="clear" (click)="getCurrentPosition()">Location requesting</ion-button>
-  <ion-button fill="clear" (click)="resetPosition()">Reset</ion-button>
-</ion-card>
-<google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
-  <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"></map-marker>
-</google-map>
+    
+    <ion-button fill="clear" (click)="getCurrentPosition()">Location requesting</ion-button>
+    <ion-button fill="clear" (click)="resetPosition()">Reset</ion-button> -->
+  <ion-content [fullscreen]="true">
+    <capaitor-google-map id="map" #map></capaitor-google-map>
+  </ion-content>
+  <!--
+    <google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)" (mapReady)="onMapReady()">
+      <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"></map-marker>
+    </google-map>-->
+    
