@@ -4,6 +4,8 @@ import { TodoService } from '../services/todo.service';
 import { CommonModule } from '@angular/common';
 import { Todo } from 'src/app/data/todo';
 import { Router } from '@angular/router';
+import { LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
+import { options } from 'ionicons/icons';
 
 @Component({
   selector: 'app-todo-list',
@@ -45,6 +47,35 @@ export class TodoListComponent  implements OnInit {
 
   }*/
 
+  async scheduleNotification() {
+    const today = new Date();
+    this.todos?.forEach(async (todo) => {
+      const todoDate = todo.doneDate;
+
+      if (todoDate === today) {
+        let options: ScheduleOptions = {
+          notifications: [{
+            title: 'Todo Reminder',
+            body: todo.title,
+            id: todo.id,
+            schedule: { at: todoDate }
+          }
+        ]
+        }
+        try {
+          await LocalNotifications.schedule(options);
+        } catch (error: any) {
+          console.error(error);
+        }
+      }
+
+    
+
+    });
+  }
+       
+  
+
   getTodoOfLocation (location : string) {
     let filteredTodos : Array<Todo> = []
     if (this.todos) {
@@ -58,6 +89,7 @@ export class TodoListComponent  implements OnInit {
     await this.loadData()
     event.target.complete()
   }
+
 
   async edit (todo:Todo) {
     await this.router.navigate(['tabs/tab4/todo', todo.id])
